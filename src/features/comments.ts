@@ -42,6 +42,7 @@ const commentsSlice = createSlice({
       ...state,
       items: state.items.filter(comment => comment.id !== action.payload),
     }),
+    resetComments: () => initialState,
   },
 });
 
@@ -51,6 +52,7 @@ export const {
   setCommentsError,
   addComment,
   removeComment,
+  resetComments,
 } = commentsSlice.actions;
 
 export default commentsSlice.reducer;

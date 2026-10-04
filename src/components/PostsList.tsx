@@ -6,34 +6,33 @@ import { Loader } from './Loader';
 
 export const PostsList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const author = useAppSelector(state => state.author);
   const { loaded, hasError, items: posts } = useAppSelector(
     state => state.posts,
   );
   const selectedPost = useAppSelector(state => state.selectedPost);
 
-  if (!author) {
-    return <p>No author selected</p>;
-  }
-
   if (!loaded) {
-    return <Loader />;
+    return <Loader/>;
   }
 
   if (hasError) {
     return (
-      <div className="notification is-danger">
+      <div className="notification is-danger" data-cy="PostsLoadingError">
         Something went wrong!
       </div>
     );
   }
 
   if (posts.length === 0) {
-    return <p>No posts yet</p>;
+    return (
+      <p data-cy="NoPostsYet">
+        No posts yet
+      </p>
+    );
   }
 
   return (
-    <div className="block" style={{ marginTop: '20px' }}>
+    <div data-cy="PostsList">
       <h2 className="title is-4">Posts:</h2>
       <table className="table is-narrow is-fullwidth">
         <thead>
@@ -48,11 +47,14 @@ export const PostsList: React.FC = () => {
             const isSelected = selectedPost?.id === post.id;
 
             return (
-              <tr key={post.id}>
-                <td className="is-vcentered">{post.id}</td>
+              <tr key={post.id} data-cy="Post">
+                <td className="is-vcentered" data-cy="PostId">
+                  {post.id}
+                </td>
                 <td className="is-vcentered">{post.title}</td>
                 <td className="has-text-right is-vcentered">
                   <button
+                    data-cy="PostButton"
                     type="button"
                     className={classNames('button is-link', {
                       'is-light': !isSelected,

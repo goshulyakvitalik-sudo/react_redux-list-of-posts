@@ -37,6 +37,7 @@ export const UserSelector: React.FC = () => {
   return (
     <div
       ref={dropdownRef}
+      data-cy="UserSelector"
       className={classNames('dropdown', {
         'is-active': isOpen,
       })}
@@ -49,7 +50,7 @@ export const UserSelector: React.FC = () => {
           aria-controls="dropdown-menu"
           onClick={() => setIsOpen(prev => !prev)}
         >
-          <span>{author ? author.name : 'Choose an author'}</span>
+          <span>{author ? author.name : 'Choose a user'}</span>
           <span className="icon is-small">
             <i className="fas fa-angle-down" aria-hidden="true" />
           </span>
@@ -65,8 +66,8 @@ export const UserSelector: React.FC = () => {
               className={classNames('dropdown-item', {
                 'is-active': author?.id === user.id,
               })}
-              onClick={e => {
-                e.preventDefault();
+              onClick={event => {
+                event.preventDefault();
                 handleSelect(user);
               }}
             >

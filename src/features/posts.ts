@@ -34,6 +34,7 @@ const postsSlice = createSlice({
       hasError: true,
       items: [],
     }),
+    resetPosts: () => initialState,
   },
 });
 
@@ -41,6 +42,7 @@ export const {
   setPostsLoading,
   setPostsSuccess,
   setPostsError,
+  resetPosts,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
